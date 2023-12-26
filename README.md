@@ -6,9 +6,9 @@
 - По сравнению с другими подобными продуктами, данная разработка отличается понятным кодом и удобным интерфейсом.
 **Скриншот рабочего окна приложения:**
 ----------------------------------------
- ![image](https://github.com/StephanKomov/Lab2Iter/blob/master/3.jpg)
+ ![image](https://github.com/GoodieCore/java_lab_iterator_slaid/blob/master/Iterator_img_1.JPG)
  
-![image](https://github.com/StephanKomov/Lab2Iter/blob/master/4.jpg)
+![image](https://github.com/GoodieCore/java_lab_iterator_slaid/blob/master/Iterator_img_2.JPG)
 
 
  **Разбор части кода на примере класса HelloController**
