@@ -11,7 +11,7 @@
 ![image](https://github.com/GoodieCore/java_lab_iterator_slaid/blob/master/Iterator_img_2.JPG)
 
 
- **Разбор части кода на примере класса HelloController**
+ **Разбор части кода на примере класса IteratorController**
 ```
 package com.example.java_lab_iterator_slaid;
 
