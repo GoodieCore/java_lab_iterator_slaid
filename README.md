@@ -13,84 +13,63 @@
 
  **Разбор части кода на примере класса HelloController**
 ```
-package com.example.lab2iter;
+package com.example.java_lab_iterator_slaid;
 
-import Iter.ConcreteAggregate;
-import Iter.Iterator;
+import javafx.scene.image.Image;
+import javafx.stage.FileChooser;
+import java.io.File;
+import java.util.ArrayList;
+import java.util.List;
+
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.Initializable;
-import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
-import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.util.Duration;
 
-import java.net.URL;
-import java.util.ResourceBundle;
-
-public class HelloController implements Initializable {
-    public Label labelError;
+public class IteratorController {
+    public ImageView imgView;
+    public TextField inputTime;
+    Timeline time = new Timeline();
+    public ConcreteAggregate concreteAggregate = new ConcreteAggregate("");
+    public Iterator iterator = concreteAggregate.getIterator();
     @FXML
-    private ImageView imgView;
-
-    private Button btnClickStop;
-
-    @FXML
-    private TextField speedTextField;
-
-    public ConcreteAggregate imgBuild = new ConcreteAggregate("");
-    public Iterator imgIter = imgBuild.getIterator();
-    Timeline timeline = new Timeline();
-
-
-
-    public void btnClickBack() {
-        imgView.setImage(imgIter.preview());
+    public void onNextButtonClick(){
+        imgView.setImage(iterator.next());
     }
-
-    public void btnClickNext() {
-        imgView.setImage(imgIter.next());
-    }
-
     @FXML
-    private void btnClickSlideShow() {
-        String speedText = speedTextField.getText();
-
-        if (speedText.isEmpty()) {
-            labelError.setText("Введите скорость для слайд-шоу");
-        } else {
-            try {
-                int time = Integer.parseInt(speedText);
-
-                labelError.setText("");
-                timeline = new Timeline();
-                timeline.setCycleCount(Timeline.INDEFINITE);
-                timeline.getKeyFrames().add(new KeyFrame(Duration.seconds(time), event -> {
-                    imgView.setImage(imgIter.next());
-                }));
-                timeline.play();
-            } catch (NumberFormatException e) {
-                labelError.setText("Введите числовое значение для скорости слайд-шоу");
-            }
+    public void onPrevButtonClick(){
+        imgView.setImage(iterator.prev());
+    }
+    @FXML
+    public void onChouseButtonClick(){
+        FileChooser fileChooser = new FileChooser();
+        File file = fileChooser.showOpenDialog(imgView.getScene().getWindow());
+        if (file != null) {
+            String filename = file.getAbsolutePath();
+            Image image = new Image("file:" + filename);
+            imgView.setImage(image);
         }
     }
 
     @FXML
-    private void btnClickStop() {
-        timeline.stop();
-    }
+    public void onStartButtonClick(){
+        int playtime= Integer.parseInt(inputTime.getText());
 
-    @Override
-    public void initialize(URL url, ResourceBundle resourceBundle) {
-        imgView.setImage(new Image("/1.jpg"));
+        time = new Timeline();
+        time.setCycleCount(Timeline.INDEFINITE);
+        time.getKeyFrames().add(new KeyFrame(Duration.seconds(playtime), event -> {
+            imgView.setImage(iterator.next());
+        }));
+        time.play();
     }
-
+    public void onStopButtonClick(ActionEvent actionEvent) {
+        time.stop();
+        time.getKeyFrames().clear();
+    }
 }
 ```
 ------------------------
@@ -98,11 +77,11 @@ public class HelloController implements Initializable {
 ## Архитектура
 Диаграмма классов:
 
- ![image](https://github.com/StephanKomov/Lab2Iter/blob/master/5.jpg)
+ ![image](https://github.com/GoodieCore/java_lab_iterator_slaid/blob/master/Iterator_img_3.JPG)
 
 
-## Завсимости
-Для работы данного приложежния необходимы JavaFX и JDK 20.
+## Зависимости
+Для работы данного приложежния необходимы JavaFX и JDK 21.
 
 ## Установка
 Не требуется. Достаточно запустить проект через любую доступную среду разработки JAVA.
@@ -112,10 +91,10 @@ public class HelloController implements Initializable {
 
 
 ## Применение
-В приложении можно просматривать картинки, путём переключения их между собой на кнопки "<" и ">".
-Так же в программе предусмотрено переключение слайдов автоматически.
+В приложении можно просматривать картинки, путём переключения их между собой на кнопки "prev" и "next".
+Также в программе предусмотрено переключение слайдов автоматически.
 Для работы слайд-шоу требуется указать скорость переключения файлов в сек.
-Так же можно остановить слайд-шоу кнопкой "стоп"
+Также можно остановить слайд-шоу кнопкой "стоп"
 
 
 
@@ -126,7 +105,7 @@ public class HelloController implements Initializable {
 Проблемы не обноружены 
 
 ## Получение справочной информации
-По всем вопрсам можно обратиться в [ВК](https://vk.com/id484742584) разработчика  
+По всем вопрсам можно обратиться в [ВК](https://vk.com/iayiwer) разработчика  
 
 ## Приглашение к сотрудничеству 
 В дальнейшем предполагается доработка кода, чтобы можно было добавлять картинки
